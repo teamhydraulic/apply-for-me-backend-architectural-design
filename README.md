@@ -13,9 +13,10 @@ You work at a remote company and you earn $1k a month. You are very happy. But y
 - Database Engine: PostgreSQL
 - API Documentation: OpenAPI, HATEOS and Postman
 
-### References
+### Project References
 
 - [Architectural Design Note](https://github.com/teamhydraulic/apply-for-me-backend-architectural-design/blob/main/docs/ARCHITECTURE.md)
 - [Database and SQL Schema](https://github.com/teamhydraulic/apply-for-me-backend-architectural-design/blob/main/src/main/resources/schema.sql)
+- [Object Relational Mapping (ORM) Models](https://github.com/teamhydraulic/apply-for-me-backend-architectural-design/tree/main/src/main/java/ng/hng/hydraulic/applyforme/model)
 - [API and Postman Documentation](https://www.postman.com/maintenance-physicist-41351297/workspace/team-hydraulic)
 
