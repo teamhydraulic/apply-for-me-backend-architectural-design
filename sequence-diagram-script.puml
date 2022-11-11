@@ -1,0 +1,25 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+Professional -> App: SignUp
+App -> App: Validation
+App --> Professional: SignUp Response
+App -> Database: Save SignUp details
+Professional -> App: LogIn
+App -> Database: Authentication
+Database --> App: Authentication response
+App --> Professional: Login feedback
+Professional -> App: update professional attachment and metadata
+App -> Database: Save professional info
+App --> Professional: Profile update feedback
+Professional -> App: LogOut
+Applier -> Database: Query DB for Dev's profile details
+Database --> Applier: Return details
+Applier -> JobListings: Search for openings
+JobListings --> Applier: Return matched openings
+Applier -> JobListings: Apply for job
+JobListings --> Applier: Return  job application status
+Applier -> Database: Update Job_submission table
+@enduml
