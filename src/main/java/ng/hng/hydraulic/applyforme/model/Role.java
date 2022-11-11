@@ -22,7 +22,7 @@ public class Role {
     @Column(nullable = false)
     private String title;
 
-    @Column(name ="user_id", nullable = false)
+    @Column(name ="member_id", nullable = false)
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
     private User user;
 }

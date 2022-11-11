@@ -20,7 +20,7 @@ public class Applier {
     private Long id;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "member_id")
     private User user;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
