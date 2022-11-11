@@ -91,14 +91,14 @@ CREATE TABLE IF NOT EXISTS MEMBER_ROLE (
 	id bigserial NOT NULL,
   	title VARCHAR(200) NOT NULL,
 
-  	user_id INT NOT NULL,
+  	member_id INT NOT NULL,
 	primary key (id)
 );
 
 
 ALTER TABLE APPLIER
-    ADD CONSTRAINT applier_user_id
-        FOREIGN KEY (user_id)
+    ADD CONSTRAINT applier_member_id
+        FOREIGN KEY (member_id)
             REFERENCES MEMBER (id);
 
 ALTER TABLE APPLIER
@@ -107,8 +107,8 @@ ALTER TABLE APPLIER
             REFERENCES PROFESSIONAL (id);
 
 ALTER TABLE PROFESSIONAL
-    ADD CONSTRAINT professional_user_id
-        FOREIGN KEY (user_id)
+    ADD CONSTRAINT professional_member_id
+        FOREIGN KEY (member_id)
             REFERENCES MEMBER (id);
 
 ALTER TABLE PROFESSIONAL_ATTACHMENT
@@ -132,6 +132,6 @@ ALTER TABLE JOB_SUBMISSION
             REFERENCES APPLIER (id);
 
 ALTER TABLE MEMBER_ROLE
-    ADD CONSTRAINT member_role_user_id
-        FOREIGN KEY (user_id)
+    ADD CONSTRAINT member_role_member_id
+        FOREIGN KEY (member_id)
             REFERENCES MEMBER (id);

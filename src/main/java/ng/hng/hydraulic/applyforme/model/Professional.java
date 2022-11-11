@@ -20,8 +20,9 @@ public class Professional {
     private Long id;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    private User user;
+
+    @JoinColumn(name = "member_id")
+    private Member member;
 
     @Column(name = "available_for_interview" , nullable = false)
     private boolean availableForInterview;
