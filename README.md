@@ -25,6 +25,7 @@ You work at a remote company and you earn $1k a month. You are very happy. But y
 
 - [Conventional Commit](https://www.conventionalcommits.org/en/v1.0.0/)
 - [Getting started with Git: a comprehensive guide for newbies](https://codegym.cc/groups/posts/379-getting-started-with-git-a-comprehensive-guide-for-newbies)
+- [Commits and Branching Standards to be used in this project](https://gist.github.com/digitaljhelms/4287848)
 
 ### Language and Framework Tutorial
 - [Spring boot and Hibernate](https://github.com/teamhydraulic/apply-for-me-backend-architectural-design/blob/main/docs/TUTORIAL.md)
