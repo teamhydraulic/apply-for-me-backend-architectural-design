@@ -12,7 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name ="MEMBER_ROLE")
+@Table(name ="ROLES")
 public class Role {
 
     @Id
@@ -21,8 +21,4 @@ public class Role {
 
     @Column(nullable = false)
     private String title;
-
-    @Column(name ="member_id", nullable = false)
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
-    private Member member;
 }

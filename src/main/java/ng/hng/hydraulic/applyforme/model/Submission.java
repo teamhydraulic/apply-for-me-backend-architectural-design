@@ -41,12 +41,12 @@ public class Submission {
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = false, name = "created_on", updatable = false)
+    @Column(name = "created_on", nullable = false, updatable = false)
     private Date createdOn;
 
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = false, name = "updated_on")
+    @Column(name = "updated_on", nullable = false)
     private Date updatedOn;
 
 }
