@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -20,7 +22,6 @@ public class Applier {
     private Long id;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-
     @JoinColumn(name = "member_id")
     private Member member;
 
@@ -29,5 +30,5 @@ public class Applier {
     private Professional professional;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "professional")
-    private Submission submission;
+    private Set<Submission> submissions = new HashSet<>();
 }
