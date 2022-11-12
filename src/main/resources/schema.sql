@@ -135,3 +135,7 @@ ALTER TABLE MEMBER_ROLE
     ADD CONSTRAINT member_role_member_id
         FOREIGN KEY (member_id)
             REFERENCES MEMBER (id);
+            
+ALTER TABLE MEMBER
+	ADD CONSTRAINT member_email_address UNIQUE(email_address);
+		

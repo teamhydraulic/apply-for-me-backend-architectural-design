@@ -15,7 +15,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name ="MEMBER")
+@Table(name ="MEMBER", uniqueConstraints = { @UniqueConstraint(columnNames = "email_address")} )
 public class Member {
 
     @Id
