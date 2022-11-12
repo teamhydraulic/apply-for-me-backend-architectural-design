@@ -9,13 +9,29 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name ="MEMBER")
+@Table(name ="MEMBER",
+        indexes = {
+            @Index(
+                    columnList = "email_address",
+                    name = "email_address_idx",
+                    unique = true
+            ),
+        },
+        uniqueConstraints = {
+            @UniqueConstraint(
+                    columnNames = {"email_address", "phone_number"},
+                    name = "email_address_phone_number_uq"
+            )
+        }
+)
 public class Member {
 
     @Id
@@ -32,28 +48,46 @@ public class Member {
     private String nationality;
 
     @Temporal(TemporalType.DATE)
-    @Column(name ="date_of_birth", nullable = false, updatable = true)
+    @Column(name ="date_of_birth", nullable = false, updatable = false)
     private Date dateOfBirth;
 
     @Column(name ="job_title", nullable = false)
     private String jobTitle;
 
-    @Column(name = "email_address", nullable = false)
+    @Column(name = "email_address", nullable = false, updatable = true)
     private String emailAddress;
+
+    @Column(name ="phone_number", nullable = false, updatable = true)
+    private String phoneNumber;
 
     @Column(name ="password", nullable = false)
     private String password;
 
+    @Column(name ="avatar", nullable = true)
+    private String avatar;
+
     @Column(name ="active", nullable = false)
-    private boolean isActive;
+    private boolean isActive = true;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = false, name = "created_on", updatable = false)
+    @Column(name = "created_on", updatable = false, nullable = false)
     private Date createdOn;
 
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = false, name = "updated_on")
+    @Column(name = "updated_on", nullable = false)
     private Date updatedOn;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "member_roles",
+            joinColumns = @JoinColumn(
+                    name = "member_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "role_id", referencedColumnName = "id")
+    )
+    private Set<Role> roles = new HashSet<>();
+
+
 }
