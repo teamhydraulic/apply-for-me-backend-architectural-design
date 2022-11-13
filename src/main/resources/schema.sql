@@ -166,10 +166,12 @@ ALTER TABLE MEMBER_ROLES
     ADD CONSTRAINT `role_fk`
         FOREIGN KEY (`role_id`)
             REFERENCES `ROLES` (`id`)
-                ON CASCADE DELETE;
+                ON DELETE CASCADE
+                ON UPDATE CASCADE;
 
 ALTER TABLE MEMBER_ROLES
     ADD CONSTRAINT `member_fk`
         FOREIGN KEY (`member_id`)
             REFERENCES `MEMBER` (`id`)
-                ON CASCADE DELETE;
+                ON DELETE CASCADE
+                ON UPDATE CASCADE;
