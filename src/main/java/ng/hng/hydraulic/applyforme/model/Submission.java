@@ -10,6 +10,11 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.util.Date;
 
+
+/**
+ * This entity records job submission that was made by the applier
+ * on behalf of the developer and which developer.
+ */
 @Getter
 @Setter
 @AllArgsConstructor
