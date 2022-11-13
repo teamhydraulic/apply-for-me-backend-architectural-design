@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `roles` (
 	PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `member_roles` (
+CREATE TABLE IF NOT EXISTS `member_roles` (
   `member_id` BIGINT NOT NULL,
   `role_id` BIGINT NOT NULL
 );
@@ -114,14 +114,14 @@ ALTER TABLE `member_roles`
     ADD UNIQUE `member_role_uq` (`member_id`, `role_id`);
 
 ALTER TABLE `member`
-    ADD CONSTRAINT `nationality_fk`
+    ADD CONSTRAINT `member_nationality_fk`
         FOREIGN KEY (`nationality_id`)
             REFERENCES `country` (`id`)
                 ON DELETE RESTRICT
                 ON UPDATE RESTRICT;
 
 ALTER TABLE `member`
-    ADD CONSTRAINT `country_of_residence_fk`
+    ADD CONSTRAINT `member_country_of_residence_fk`
         FOREIGN KEY (`country_of_residence_id`)
             REFERENCES `country` (`id`)
                 ON DELETE RESTRICT
