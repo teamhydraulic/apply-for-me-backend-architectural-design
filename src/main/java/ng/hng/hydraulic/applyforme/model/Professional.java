@@ -9,6 +9,10 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * This is a user who is seeking for greener pastures or new job opportunities aside
+ * his or her current role or position at work.
+ */
 @Getter
 @Setter
 @AllArgsConstructor
@@ -25,17 +29,29 @@ public class Professional {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @Column(name = "available_for_interview" , nullable = false)
-    private boolean availableForInterview = false;
-
     @OneToOne(mappedBy = "professional")
     private Applier applier;
 
-    @OneToMany(mappedBy = "professional")
-    private ProfessionalAttachment professionalAttachment;
+    @Column(name = "available_for_interview" , nullable = false)
+    private boolean availableForInterview = false;
+
+    @Column(name ="linkedin_link")
+    private String linkedinLink;
+
+    @Column(name = "hobbies")
+    private String hobbies;
+
+    @Column(name ="other_link_1")
+    private String otherLink1;
+
+    @Column(name ="other_link_2")
+    private String otherLink2;
+
+    @Column(name ="other_link_3")
+    private String otherLink3;
 
     @OneToMany(mappedBy = "professional")
-    private ProfessionalMetadata professionalMetadata;
+    private ProfessionalProfile professionalProfile;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "professional")
     private Set<Submission> submissions = new HashSet<>();
