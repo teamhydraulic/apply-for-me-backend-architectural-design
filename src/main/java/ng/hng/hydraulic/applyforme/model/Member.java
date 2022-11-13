@@ -44,8 +44,13 @@ public class Member {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name ="nationality", nullable = false)
-    private String nationality;
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "nationality_id", nullable = false)
+    private Country nationality;
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "country_of_residence", nullable = false)
+    private Country countryOfResidence;
 
     @Temporal(TemporalType.DATE)
     @Column(name ="date_of_birth", nullable = false, updatable = false)

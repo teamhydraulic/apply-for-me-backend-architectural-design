@@ -26,9 +26,6 @@ public class ProfessionalMetadata {
     @Column(name = "salary_range", nullable = false)
     private String salaryRange;
 
-    @Column(name = "country_of_residence", nullable = false)
-    private String countryOfResidence;
-
     @Column(name ="preferred_job_location_type", nullable = false)
     private JobLocationType preferredJobLocationType;
 
@@ -62,7 +59,7 @@ public class ProfessionalMetadata {
     @Column(name ="other_comment", nullable = true)
     private String otherComment;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name ="professional_id")
     private Professional professional;
 

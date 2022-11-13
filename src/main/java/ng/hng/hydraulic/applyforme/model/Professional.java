@@ -26,15 +26,15 @@ public class Professional {
     private Member member;
 
     @Column(name = "available_for_interview" , nullable = false)
-    private boolean availableForInterview;
+    private boolean availableForInterview = false;
 
     @OneToOne(mappedBy = "professional")
     private Applier applier;
 
-    @OneToOne(mappedBy = "professional")
+    @OneToMany(mappedBy = "professional")
     private ProfessionalAttachment professionalAttachment;
 
-    @OneToOne(mappedBy = "professional")
+    @OneToMany(mappedBy = "professional")
     private ProfessionalMetadata professionalMetadata;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "professional")
