@@ -64,6 +64,7 @@ CREATE TABLE IF NOT EXISTS MEMBER (
 	`first_name` VARCHAR(40) NOT NULL,
  	`last_name` VARCHAR(40) NOT NULL,
  	`nationality` VARCHAR(150) NOT NULL,
+ 	`country_of_residence` VARCHAR(150) NOT NULL,
 	`date_of_birth` DATE NOT NULL DEFAULT CURRENT_DATE,
   	`job_title` VARCHAR(150) NOT NULL,
   	`phone_number` VARCHAR(15) NOT NULL,
@@ -108,9 +109,26 @@ CREATE UNIQUE INDEX
     CONCURRENTLY `email_phone_uq`
         ON MEMBER (`email_address`, `phone_number`);
 
+CREATE TABLE IF NOT EXISTS COUNTRY (
+	`id` BIGSERIAL NOT NULL,
+  	`title` VARCHAR(200) NOT NULL,
+  	`abbreviation` VARCHAR(5) NOT NULL,
+	primary key (`id`)
+);
+
 ALTER TABLE MEMBER
     ADD CONSTRAINT `email_address_phone_number_uq`
         UNIQUE USING INDEX `email_phone_uq`;
+
+ALTER TABLE MEMBER
+    ADD CONSTRAINT `nationality_fk`
+        FOREIGN KEY (`nationality_id`)
+            REFERENCES COUNTRY (`id`);
+
+ALTER TABLE MEMBER
+    ADD CONSTRAINT `country_of_residence_fk`
+        FOREIGN KEY (`country_of_residence`)
+            REFERENCES COUNTRY (`abbreviation`);
 
 ALTER TABLE APPLIER
     ADD CONSTRAINT `member_fk`
