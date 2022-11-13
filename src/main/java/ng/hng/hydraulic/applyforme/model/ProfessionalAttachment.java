@@ -31,7 +31,7 @@ public class ProfessionalAttachment {
     @Column(name ="cover_letter_link", nullable = false)
     private String coverLetterLink;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name ="professional_id")
     private Professional professional;
 
