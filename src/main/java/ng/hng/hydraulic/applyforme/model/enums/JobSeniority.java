@@ -3,15 +3,17 @@ package ng.hng.hydraulic.applyforme.model.enums;
 import lombok.Getter;
 
 @Getter
-public enum JobLocationType {
+public enum JobSeniority {
 
-    REMOTE("Remote"),
-    ONSITE("Onsite"),
-    HYBRID("Hybrid");
+    TRAINEE("Trainee"),
+    INTERN("Intern"),
+    JUNIOR("Junior"),
+    MID_LEVEL("Mid-Level"),
+    SENIOR("Senior");
 
     private String value;
 
-    JobLocationType(String value) {
+    JobSeniority(String value) {
         this.value = value;
     }
 
