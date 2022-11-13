@@ -1,13 +1,13 @@
-CREATE TABLE IF NOT EXISTS APPLIER (
+CREATE TABLE IF NOT EXISTS `applier` (
 	`id` BIGINT AUTO_INCREMENT,
-  	`member_id` INT NOT NULL,
-  	`professional_id` INT NULL,
+  	`member_id` BIGINT NOT NULL,
+  	`professional_id` BIGINT NULL,
 
 	PRIMARY KEY (`id`)
 );
 
 
-CREATE TABLE IF NOT EXISTS PROFESSIONAL (
+CREATE TABLE IF NOT EXISTS `professional` (
 	`id` BIGINT AUTO_INCREMENT,
 	`available_for_interview` BOOLEAN NOT NULL DEFAULT FALSE,
  	`linkedin_link` VARCHAR(300) NULL,
@@ -15,12 +15,12 @@ CREATE TABLE IF NOT EXISTS PROFESSIONAL (
  	`other_link_2` VARCHAR(300) NULL,
  	`other_link_3` VARCHAR(300) NULL,
  	`hobbies` VARCHAR(300) NOT NULL,
-  	`member_id` INT NOT NULL,
+  	`member_id` BIGINT NOT NULL,
 
     PRIMARY KEY (`id`)
 );
 
-CREATE TABLE IF NOT EXISTS PROFESSIONAL_PROFILE (
+CREATE TABLE IF NOT EXISTS `professional_profile` (
 	`id` BIGINT AUTO_INCREMENT,
 
 	`profile_title` VARCHAR(300) NOT NULL,
@@ -42,18 +42,16 @@ CREATE TABLE IF NOT EXISTS PROFESSIONAL_PROFILE (
 	`created_on` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	`updated_on` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-  	`professional_id` INT NOT NULL,
+  	`professional_id` BIGINT NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
 
-CREATE TABLE IF NOT EXISTS MEMBER (
+CREATE TABLE IF NOT EXISTS `member` (
 	`id` BIGINT AUTO_INCREMENT,
 	`first_name` VARCHAR(40) NOT NULL,
  	`last_name` VARCHAR(40) NOT NULL,
- 	`nationality_id` INT NOT NULL,
- 	`country_of_residence_id` INT NOT NULL
-	`date_of_birth` DATE NOT NULL DEFAULT CURRENT_DATE,
+	`date_of_birth` DATE NOT NULL,
   	`current_job_title` VARCHAR(200) NOT NULL,
   	`phone_number` VARCHAR(15) NOT NULL,
   	`email_address` VARCHAR(50) NOT NULL,
@@ -63,11 +61,13 @@ CREATE TABLE IF NOT EXISTS MEMBER (
   	`created_on` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	`updated_on` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
+ 	`nationality_id` BIGINT NOT NULL,
+ 	`country_of_residence_id` BIGINT NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
 
-CREATE TABLE IF NOT EXISTS JOB_SUBMISSION (
+CREATE TABLE IF NOT EXISTS `job_submission` (
 	`id` BIGINT AUTO_INCREMENT,
   	`job_title` VARCHAR(300) NOT NULL,
   	`job_link` VARCHAR(300) NOT NULL,
@@ -75,12 +75,12 @@ CREATE TABLE IF NOT EXISTS JOB_SUBMISSION (
   	`created_on` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	`updated_on` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-  	`professional_id` INT NOT NULL,
-  	`applier_id` INT NOT NULL,
+  	`professional_id` BIGINT NOT NULL,
+  	`applier_id` BIGINT NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
-CREATE TABLE IF NOT EXISTS COUNTRY (
+CREATE TABLE IF NOT EXISTS `country` (
 	`id` BIGINT AUTO_INCREMENT,
   	`title` VARCHAR(300) NOT NULL,
   	`abbreviation` VARCHAR(10) NOT NULL,
@@ -91,87 +91,90 @@ CREATE TABLE IF NOT EXISTS COUNTRY (
 );
 
 
-CREATE TABLE IF NOT EXISTS ROLES (
+CREATE TABLE IF NOT EXISTS `roles` (
 	`id` BIGINT AUTO_INCREMENT,
   	`title` VARCHAR(200) NOT NULL,
 
 	PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `MEMBER_ROLES` (
-  `member_id` INT NOT NULL,
-  `role_id` INT NOT NULL
+CREATE TABLE IF NOT EXISTS `member_roles` (
+  `member_id` BIGINT NOT NULL,
+  `role_id` BIGINT NOT NULL
 );
 
 
-ALTER TABLE `MEMBER`
+ALTER TABLE `member`
     ADD UNIQUE `email_phone_uq` (`email_address`, `phone_number`);
 
-ALTER TABLE `MEMBER_ROLES`
+ALTER TABLE `country`
+    ADD UNIQUE `country_uq` (`title`, `abbreviation`);
+
+ALTER TABLE `member_roles`
     ADD UNIQUE `member_role_uq` (`member_id`, `role_id`);
 
-ALTER TABLE `MEMBER`
-    ADD CONSTRAINT `nationality_fk`
+ALTER TABLE `member`
+    ADD CONSTRAINT `member_nationality_fk`
         FOREIGN KEY (`nationality_id`)
-            REFERENCES `COUNTRY` (`id`)
-                ON DELETE SET NULL
-                ON UPDATE SET NULL;
+            REFERENCES `country` (`id`)
+                ON DELETE RESTRICT
+                ON UPDATE RESTRICT;
 
-ALTER TABLE `MEMBER`
-    ADD CONSTRAINT `country_of_residence_fk`
+ALTER TABLE `member`
+    ADD CONSTRAINT `member_country_of_residence_fk`
         FOREIGN KEY (`country_of_residence_id`)
-            REFERENCES `COUNTRY` (`id`)
-                ON DELETE SET NULL
-                ON UPDATE SET NULL;
+            REFERENCES `country` (`id`)
+                ON DELETE RESTRICT
+                ON UPDATE RESTRICT;
 
-ALTER TABLE `APPLIER`
-    ADD CONSTRAINT `member_fk`
+ALTER TABLE `applier`
+    ADD CONSTRAINT `applier_member_fk`
         FOREIGN KEY (`member_id`)
-            REFERENCES `MEMBER` (`id`)
+            REFERENCES `member` (`id`)
                 ON DELETE CASCADE
                 ON UPDATE CASCADE;
 
-ALTER TABLE `APPLIER`
-    ADD CONSTRAINT `professional_fk`
+ALTER TABLE `applier`
+    ADD CONSTRAINT `applier_professional_fk`
         FOREIGN KEY (`professional_id`)
-            REFERENCES `PROFESSIONAL` (`id`)
+            REFERENCES `professional` (`id`)
                 ON DELETE SET NULL
                 ON UPDATE CASCADE;
 
-ALTER TABLE `PROFESSIONAL`
-    ADD CONSTRAINT `member_fk`
+ALTER TABLE `professional`
+    ADD CONSTRAINT `professional_member_fk`
         FOREIGN KEY (`member_id`)
-            REFERENCES `MEMBER` (`id`)
+            REFERENCES `member` (`id`)
                 ON DELETE CASCADE
                 ON UPDATE CASCADE;
 
-ALTER TABLE PROFESSIONAL_PROFILE
-    ADD CONSTRAINT `professional_fk`
+ALTER TABLE `professional_profile`
+    ADD CONSTRAINT `profile_professional_fk`
         FOREIGN KEY (`professional_id`)
-            REFERENCES PROFESSIONAL (`id`)
+            REFERENCES `professional` (`id`)
                 ON DELETE CASCADE
                 ON UPDATE CASCADE;
 
-ALTER TABLE JOB_SUBMISSION
-    ADD CONSTRAINT `professional_fk`
+ALTER TABLE `job_submission`
+    ADD CONSTRAINT `submission_professional_fk`
         FOREIGN KEY (`professional_id`)
-            REFERENCES PROFESSIONAL (`id`);
+            REFERENCES `professional` (`id`);
 
-ALTER TABLE JOB_SUBMISSION
-    ADD CONSTRAINT `applier_fk`
+ALTER TABLE `job_submission`
+    ADD CONSTRAINT `submission_applier_fk`
         FOREIGN KEY (`applier_id`)
-            REFERENCES APPLIER (`id`);
+            REFERENCES `applier` (`id`);
 
-ALTER TABLE MEMBER_ROLES
-    ADD CONSTRAINT `role_fk`
+ALTER TABLE `member_roles`
+    ADD CONSTRAINT `member_role_fk`
         FOREIGN KEY (`role_id`)
-            REFERENCES `ROLES` (`id`)
+            REFERENCES `roles` (`id`)
                 ON DELETE CASCADE
                 ON UPDATE CASCADE;
 
-ALTER TABLE MEMBER_ROLES
-    ADD CONSTRAINT `member_fk`
+ALTER TABLE `member_roles`
+    ADD CONSTRAINT `member_member_fk`
         FOREIGN KEY (`member_id`)
-            REFERENCES `MEMBER` (`id`)
+            REFERENCES `member` (`id`)
                 ON DELETE CASCADE
                 ON UPDATE CASCADE;

@@ -23,16 +23,24 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name ="PROFESSIONAL_PROFILE")
+@Table(name ="professional_profile")
 public class ProfessionalProfile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * This is used to identify the profile that an applier can use to apply and submit a job application that is tailored or suitable to the professional.
+     */
     @Column(name ="profile_title", nullable = false)
     private String profileTitle;
 
+    /**
+     * This attribute or field is useful when a developer or designer or any other professional wants to create another profile.
+     * If this profile is set as the main profile, anytime a new profile is about to be created; the details or data in the profile record set as
+     * main will be used to prepopulate the fields to be used for the new profile to be persisted or saved or created.
+     */
     @Column(name = "main_profile", nullable = false)
     private Boolean mainProfile = false;
 
