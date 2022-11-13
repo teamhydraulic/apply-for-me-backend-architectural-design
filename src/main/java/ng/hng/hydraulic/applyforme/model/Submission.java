@@ -10,6 +10,11 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.util.Date;
 
+
+/**
+ * This entity records job submission that was made by the applier
+ * on behalf of the developer and which developer.
+ */
 @Getter
 @Setter
 @AllArgsConstructor
@@ -41,12 +46,12 @@ public class Submission {
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = false, name = "created_on", updatable = false)
+    @Column(name = "created_on", nullable = false, updatable = false)
     private Date createdOn;
 
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = false, name = "updated_on")
+    @Column(name = "updated_on", nullable = false)
     private Date updatedOn;
 
 }
