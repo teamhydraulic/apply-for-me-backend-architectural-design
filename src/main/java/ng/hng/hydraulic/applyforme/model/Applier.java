@@ -9,6 +9,10 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * This is a user or member of the system who submits application on behalf of a developer
+ * or professional. Applier can be an Agent or Reverse Recruiter.
+ */
 @Getter
 @Setter
 @AllArgsConstructor
