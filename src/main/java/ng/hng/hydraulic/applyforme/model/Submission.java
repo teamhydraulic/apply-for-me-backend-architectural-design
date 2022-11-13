@@ -20,7 +20,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name ="JOB_SUBMISSION")
+@Table(name ="job_submission")
 public class Submission {
 
     @Id

@@ -27,7 +27,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name ="MEMBER",
+@Table(name ="member",
         indexes = {
             @Index(
                     columnList = "email_address",
