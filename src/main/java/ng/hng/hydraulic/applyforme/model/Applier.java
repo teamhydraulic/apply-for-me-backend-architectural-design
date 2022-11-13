@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Getter
 @Setter
@@ -29,5 +30,5 @@ public class Applier {
     private Professional professional;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "professional")
-    private Submission submission;
+    private Collection<Submission> submission;
 }
