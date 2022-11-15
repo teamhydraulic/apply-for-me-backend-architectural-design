@@ -10,7 +10,7 @@ You work at a remote company and you earn $1k a month. You are very happy. But y
 
 - Programming Language: Java
 - Runtime: JDK 11 
-- Database Engine: PostgreSQL
+- Database Engine: MySQL
 - API Documentation: OpenAPI, HATEOS and Postman
 
 ### Project References
