@@ -5,8 +5,8 @@ autonumber
 
 Professional -> App: SignUp
 App -> App: Validation
-App --> Professional: SignUp Response
 App -> Database: Save SignUp details
+App --> Professional: SignUp Response
 Professional -> App: LogIn
 App -> Database: Authentication
 Database --> App: Authentication response
